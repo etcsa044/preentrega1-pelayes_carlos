@@ -1,0 +1,23 @@
+.body{
+    background-color: black;
+    color: red;
+}
+
+.contenedor{
+    width: 100%;
+    height: 50vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 150px;
+}
+
+.boton{
+    width: 300px;
+    height: 70px;
+    font-size: x-large;
+    letter-spacing: 4px;
+    cursor: pointer;
+}
