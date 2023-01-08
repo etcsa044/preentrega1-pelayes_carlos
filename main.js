@@ -158,10 +158,11 @@ function adivinar() {                                                     //Func
     }
 
     alert(palabraOculta);
+
     
   }
 }
-
+window.location.reload()
 
 //INICIO: 
 
