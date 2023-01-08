@@ -52,6 +52,7 @@ function jugar() {
 
   alert(`su palabra contiene ${palabra.length} letras:      ${palabraOculta}`);
   adivinar();
+  window.location.reload()
 }
 
 
@@ -162,7 +163,7 @@ function adivinar() {                                                     //Func
     
   }
 }
-window.location.reload()
+
 
 //INICIO: 
 
