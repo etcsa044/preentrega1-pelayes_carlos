@@ -66,6 +66,7 @@ function mensajeAciertos(a, b, c, d) {                                     //Mue
     alert(`la letra pertenece a la Palabra Oculta`);
   } else{
     alert(`la letra seleccionada NO pertenece a la Palabra Oculta`);
+    restarVidas();
   }
 }
 
@@ -92,6 +93,12 @@ function convertirPalabraArray(a) {                                       //Conv
   return palabra1;
 }
 
+
+function restarVidas(){
+  vidas -= 1;
+  return vidas;
+}
+
 function adivinar() {                                                     //Función encargada de la logica del del juego, una vez que inicia, inicia un doble for, el primero pedirá
                                                                           //una letra al Usuario, el segundo compara la letra ingresada con todas las que forman el array
                                                                           //evaluando las que corresponden o no a la Palabra Oculta. 
@@ -104,7 +111,9 @@ function adivinar() {                                                     //Func
     letra = prompt("Selecciona una letra: ");
     letra = letra.toUpperCase();
 
-    letrasSeleccionadas += "[" + letra + "]";
+    letrasSeleccionadas += "[" + letra + "] ";
+
+    alert("hasta el momento has seleccionado: "+ letrasSeleccionadas);
 
     for (i = 0; i <= palabra.length; i++) {
       if (palabra1[i] == letra) {
@@ -128,7 +137,7 @@ function adivinar() {                                                     //Func
     contadorAux_2 = 0;
     contadorAciertos = 0;
 
-    vidas -= 1;
+    
 
     console.log(palabraOculta);
     console.log(palabra1);
