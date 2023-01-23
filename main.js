@@ -108,7 +108,7 @@ function jugar() {
 
   let seleccionRandom = elegirPalabraRandom(nivelDeJuego);
 
-  // palabra = prompt("ingrese la palabra a Adivinar: ");           >>>>>>>>>>>>>>>>>>>>>>><ya lo podemos sacar
+  
   palabra = nivelDeJuego[seleccionRandom].palabra;
 
   palabra = palabra.toUpperCase();
@@ -172,15 +172,17 @@ function adivinar() {
   let contadorAux = 0;
   let contadorAux_2 = 0;
   let contadorAciertos = 0;
+  
+  while (vidas > 0) {
+     
 
-  for (let j = 0; j < 6; j++) {
     letra = prompt("Selecciona una letra: ");
     letra = letra.toUpperCase();
 
     letrasSeleccionadas += "[" + letra + "] ";
 
     alert("hasta el momento has seleccionado: " + letrasSeleccionadas);
-
+    
     for (i = 0; i <= palabra.length; i++) {
       if (palabra1[i] == letra) {
         palabraOculta[i] = letra;
