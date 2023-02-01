@@ -14,12 +14,60 @@
 
     <div class="contenedor">
         <h1>EL AHORCADO</h1>
-        <h2>Adivina la Palabra, tienes seis vidas!</h2>
+        <h2>Adivina la Palabra, tienes <span id="vidas">6</span>  vidas!</h2>
         <h3>Por cada letra que no pertenezca a la palabra oculta pierdes una vida.</h3>
-        <h3>Buena Suerte!</h3>
+        
+
+    </div>
+
+    <div class="contenedor_nivel">
+
+        <form>
+            <fieldset>
+                <legend>Nivel de Dificultad</legend>
+
+                <input type="radio" class="radios" name="dificultad" value="facil"> Fácil
+
+                <input type="radio" class="radios" name="dificultad" value="intermedio"> Intermedio
+
+                <input type="radio" class="radios" name="dificultad" value="dificil"> Difícil
+
+            </fieldset>
+        </form>
+    </div>
+
+    <button class="boton" id="boton_inicio">INICIO</button>
+
+    <div class="contenedor_palabra_oculta">
+
+        <p id="p_cantidad_letras"></p>
+        <p id="p_palabra_oculta"></p>
+        <p id="p_pista"></p>
+
+    </div>
 
 
-        <button class="boton" onclick="jugar()">INICIO</button>
+
+    <div class="contenedor_letras">
+
+        <label for="letra_usuario">Ingresa tu letra</label>
+        <input type="text" name="letra_usuario" id="letra_usuario" placeholder="...">
+        <button id="boton_arriesgar">Arriesgar letra</button>
+        
+    </div>
+
+    <div class="letras_ingresadas">
+
+        <p id="p_letras_ingresadas"></p>
+
+    </div>
+
+    <div class="mensajes_aciertos">
+
+
+        <p id="p_mensajes_aciertos">Aguardando...</p>
+        <p id="p_mensajes_oportunidades">Buena Suerte!!</p>
+
     </div>
 
     <script src="./main.js"></script>

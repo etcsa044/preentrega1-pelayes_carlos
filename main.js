@@ -11,23 +11,6 @@ class PalabraDisponible {
   }
 }
 
-// ESTA SECCION ESTÁ COMENTADA SOLO PORQUE VA A TENER SENTIDO EN LA VERSION FINAL, DONDE DE NO MEDIAR INCONVENIENTES, PODRÍA SER UNA APP MULTIJUGADOR
-
-// class PalabraOculta {
-//   constructor(palabra, pista) {
-//     this.palabra = palabra;
-//     this.pista = pista;
-//   }
-// }
-
-// class Usuario {
-//   constructor(nombre, vidas) {
-//     this.nombre = nombre;
-//     this.vidas = vidas;
-//   }
-// }
-
-// FIN SECCIÓN EN CONSTRUCCION.
 
 //palabras para nivel FACIL:
 
@@ -71,44 +54,99 @@ let palabrasNivelMedio = [
   palabra_medio_tres,
 ];
 
+//palabras para nivel DIFICIL:
+
+let palabra_dificil_uno = new PalabraDisponible(
+  "Epifania",
+  "Manifestación repentina de una verdad"
+);
+let palabra_dificil_dos = new PalabraDisponible(
+  "Viscocidad",
+  "propiedad importante de los líquidos que describe la resistencia del líquido al flujo y está relacionada con la fricción interna en el líquido."
+);
+let palabra_dificil_tres = new PalabraDisponible(
+  "Billete",
+  "Papel impreso o grabado, generalmente emitido por el banco central de un país, al que se le asigna un valor pecuniario determinado y se emplea como medio legal de pago."
+);
+
+let palabrasNivelDificil = [
+  palabra_dificil_uno,
+  palabra_dificil_dos,
+  palabra_dificil_tres,
+];
+
+
+
+
+
+
+
 let nombreUsuario;
 let palabra = ""; //palabra seleccionada por el usuario
 let palabra1 = ""; //palabra del usuario convertida en array
 let palabraOculta = ""; //array convertido en "#"
 let palabraFinal = ""; //Se utiliza en caso de que el usuario agote la cantidad de intentos
+
 let letra = ""; //Utilizada para almacenar las letras que debe cargar el usuario para adivinar la palabra
+
 let letrasSeleccionadas = "";
 let vidas = 6;
 
-let botonInicio = document.getElementById("botonInicio");
 
 
+
+//declaraciones DOM
+
+//botones:
+
+let botonInicio = document.getElementById("boton_inicio");
+let botonArriesgar = document.getElementById("boton_arriesgar");
+
+//textos:
+let parrafoCantidadLetras = document.getElementById("p_cantidad_letras");
+let parrafoPalabraOculta = document.getElementById("p_palabra_oculta");
+let parrafoPista = document.getElementById("p_pista");
+let parrafoLetrasIngresadas = document.getElementById("p_letras_ingresadas");
+let parrafoMensajeAciertos = document.getElementById("p_mensajes_aciertos")
+let parrafoMensajeOportunidades = document.getElementById("p_mensajes_oportunidades")
+let spanVidas = document.getElementById("vidas");
+
+// inputs
+let input_letra = document.getElementById("letra_usuario");
+let input_radios = document.getElementsByClassName("radios");
+
+//Eventos
+
+botonInicio.addEventListener("click", jugar);
+botonArriesgar.addEventListener("click", adivinar);
 
 //FUNCIONES:
+
+
+function convertirPalabraArray(a) {
+  //Convierte el String inicial en un Array de Strings.
+  palabra1 = Array.from(a);
+  return palabra1;
+}
+
 
 function ocultarPalabra() {
   //genera un array que muestra con # la cantidad de letras que tiene la palabra:
   let aux = "";
-
   for (i = 0; i < palabra.length; i++) {
     aux += "#";
   }
   palabraOculta = Array.from(aux);
-  console.log(palabraOculta);
   return palabraOculta;
 }
 
 function jugar() {
   //Da la bienvenida al usuario y llama a la funciona "ADIVINAR"
-  nombreUsuario = prompt("ingrese su nombre: ");
-
-  alert(`bienvenido ${nombreUsuario}`);
 
   let nivelDeJuego = seleccionarNivel();
 
   let seleccionRandom = elegirPalabraRandom(nivelDeJuego);
 
-  
   palabra = nivelDeJuego[seleccionRandom].palabra;
 
   palabra = palabra.toUpperCase();
@@ -116,25 +154,31 @@ function jugar() {
   palabra1 = convertirPalabraArray(palabra);
   palabraOculta = ocultarPalabra();
 
-  alert(`su palabra contiene ${palabra.length} letras:      ${palabraOculta}`);
+  parrafoCantidadLetras.innerText = `su palabra contiene ${palabra.length} letras`;
+  parrafoPalabraOculta.innerText = `Su palabra se oculta aqui: ${palabraOculta}`;
+  parrafoPista.innerText = `Aqui tienes una pista: ${nivelDeJuego[seleccionRandom].pista}`;
 
-  alert(`Aqui tienes una pista: ${nivelDeJuego[seleccionRandom].pista}`);
-
-  adivinar();
-  window.location.reload();
+  // window.location.reload();  DEJAMOS ACÁ HASTA CREAR BOTON REINICIO <<<<<<<<<<<<<<<<<<<<<<<<<
 }
 
-function mensajeAciertos(a, b, c, d) {
+function mensajeAciertos(a) {
   //Muestra mensajes en base a la letra seleccionada por el Usuario
   if (a > 1) {
-    alert(
-      `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta`
-    );
+    parrafoMensajeAciertos.innerText = `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta`;
+    // alert(
+    //   `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta`
+    // );
   } else if (a == 1) {
-    alert(`la letra pertenece a la Palabra Oculta`);
+
+    parrafoMensajeAciertos.innerText = `la letra pertenece a la Palabra Oculta`
+
+    // alert(`la letra pertenece a la Palabra Oculta`);
   } else {
-    alert(`la letra seleccionada NO pertenece a la Palabra Oculta`);
+
+    parrafoMensajeAciertos.innerText = `la letra seleccionada NO pertenece a la Palabra Oculta`
+    // alert(`la letra seleccionada NO pertenece a la Palabra Oculta`);
     restarVidas();
+    spanVidas.innerText = vidas;
   }
 }
 
@@ -143,7 +187,7 @@ function compararArrays(a, b) {
   let aux = 0;
   for (let k = 0; k < a.length; k++) {
     if (a[k] == b[k]) {
-      aux += 1;
+      aux++; // OPERADOR AVANZADO
     }
   }
   if (aux == a.length) {
@@ -153,14 +197,10 @@ function compararArrays(a, b) {
   }
 }
 
-function convertirPalabraArray(a) {
-  //Convierte el String inicial en un Array de Strings.
-  palabra1 = Array.from(a);
-  return palabra1;
-}
+
 
 function restarVidas() {
-  vidas -= 1;
+  vidas--; // OPERADOR AVANZADO
   return vidas;
 }
 
@@ -169,40 +209,28 @@ function adivinar() {
   //una letra al Usuario, el segundo compara la letra ingresada con todas las que forman el array
   //evaluando las que corresponden o no a la Palabra Oculta.
 
-  let contadorAux = 0;
-  let contadorAux_2 = 0;
   let contadorAciertos = 0;
   
-  while (vidas > 0) {
-     
-
-    letra = prompt("Selecciona una letra: ");
+    letra = input_letra.value;
     letra = letra.toUpperCase();
 
     letrasSeleccionadas += "[" + letra + "] ";
 
-    alert("hasta el momento has seleccionado: " + letrasSeleccionadas);
-    
+    parrafoLetrasIngresadas.innerText = "hasta el momento has seleccionado: " + letrasSeleccionadas;    
+
     for (i = 0; i <= palabra.length; i++) {
       if (palabra1[i] == letra) {
         palabraOculta[i] = letra;
-
         contadorAciertos += 1;
-      } else {
-        contadorAux += 1;
-        contadorAux_2 += 1;
       }
     }
 
-    mensajeAciertos(
-      contadorAciertos,
-      contadorAux,
-      contadorAux_2,
-      palabra.length
-    );
 
-    contadorAux = 0;
-    contadorAux_2 = 0;
+    input_letra.value = "";
+
+    mensajeAciertos(contadorAciertos);
+
+
     contadorAciertos = 0;
 
     console.log(palabraOculta);
@@ -212,29 +240,31 @@ function adivinar() {
 
     if (prueba) {
       alert("¡¡FELICITACIONES GANASTE!!");
-      break;
+      
     } else if (vidas > 0) {
-      alert(`te quedan ${vidas} oportunidad/es`);
+      
+      parrafoMensajeOportunidades.innerText = `te quedan ${vidas} oportunidad/es`
+
     } else if (vidas == 0) {
-      palabraFinal = prompt(
+      palabraFinal = prompt(                                                
         "Te quedaste sin vidas, debes arriesgar una palabra"
       );
       palabraFinal = palabraFinal.toUpperCase();
 
       if (palabraFinal == palabra) {
         alert("¡¡FELICITACIONES GANASTE!!");
-        break;
+        
       } else {
         alert(`Intenta de nuevo! la palabra oculta era:
-
                     ${palabra}`);
-        break;
+        
       }
     }
 
-    alert(palabraOculta);
+    parrafoPalabraOculta.innerText = `Su palabra se oculta aqui: ${palabraOculta}`
+    // alert(palabraOculta);
   }
-}
+
 
 function elegirPalabraRandom(a) {
   let auxMin = 0;
@@ -246,18 +276,11 @@ function elegirPalabraRandom(a) {
 }
 
 function seleccionarNivel() {
-  let aux = prompt("ingrese 1 para nivel facil o 2 para nivel medio");
-  while (aux != 1 && aux != 2) {
-    alert("Debe seleccionar 1 o 2");
-    aux = prompt("ingrese 1 para nivel facil o 2 para nivel medio");
-  }
-  if (aux == 1) {
+  if (input_radios[0].checked) {
     return palabrasNivelFacil;
-  } else if (aux == 2) {
+  } else if (input_radios[1].checked) {
     return palabrasNivelMedio;
+  } else if (input_radios[2].checked) {
+    return palabrasNivelDificil;
   }
 }
-
-//INICIO:
-
-//Inicia desde boton Inicio.
