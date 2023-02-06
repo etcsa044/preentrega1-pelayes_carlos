@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
+
     <link rel="stylesheet" href="./styles.css/styles.css">
     <title>Primera Entrega JS</title>
 </head>
@@ -13,10 +18,10 @@
 
 
     <div class="contenedor">
-        <h1>EL AHORCADO</h1>
-        <h2>Adivina la Palabra, tienes <span id="vidas">6</span>  vidas!</h2>
+        <h1>Bienvenido!</h1>
+        <h2>Adivina la Palabra, tienes <span id="vidas">6</span> vidas!</h2>
         <h3>Por cada letra que no pertenezca a la palabra oculta pierdes una vida.</h3>
-        
+
 
     </div>
 
@@ -26,7 +31,7 @@
             <fieldset>
                 <legend>Nivel de Dificultad</legend>
 
-                <input type="radio" class="radios" name="dificultad" value="facil"> Fácil
+                <input type="radio" class="radios" name="dificultad" value="facil" checked> Fácil
 
                 <input type="radio" class="radios" name="dificultad" value="intermedio"> Intermedio
 
@@ -36,7 +41,7 @@
         </form>
     </div>
 
-    <button class="boton" id="boton_inicio">INICIO</button>
+    <button class="boton" id="btn_inicio">INICIO</button>
 
     <div class="contenedor_palabra_oculta">
 
@@ -51,9 +56,11 @@
     <div class="contenedor_letras">
 
         <label for="letra_usuario">Ingresa tu letra</label>
-        <input type="text" name="letra_usuario" id="letra_usuario" placeholder="...">
-        <button id="boton_arriesgar">Arriesgar letra</button>
-        
+        <input type="text" name="letra_usuario" id="letra_usuario" maxlength="1" placeholder="...">
+        <button id="btn_arriesgar_letra">Arriesgar letra</button>
+        <input type="text" name="palabra_usuario" id="palabra_usuario" placeholder="...">
+        <button id="btn_arriesgar_palabra">Arriesgar palabra</button>
+
     </div>
 
     <div class="letras_ingresadas">
@@ -70,7 +77,11 @@
 
     </div>
 
-    <script src="./main.js"></script>
+
+
+    <!-- SCRIPTS -->
+
+    <script src="./Scripts/main.js"></script>
 </body>
 
 </html>
