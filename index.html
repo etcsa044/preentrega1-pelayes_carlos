@@ -10,72 +10,55 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
 
-    <link rel="stylesheet" href="./styles.css/styles.css">
+    <link rel="stylesheet" href="./styles/styles.css">
     <title>Primera Entrega JS</title>
 </head>
 
 <body class="body">
 
 
-    <div class="contenedor">
-        <h1>Bienvenido!</h1>
-        <h2>Adivina la Palabra, tienes <span id="vidas">6</span> vidas!</h2>
-        <h3>Por cada letra que no pertenezca a la palabra oculta pierdes una vida.</h3>
+
+    <h1>El Ahorcado</h1>
+
+    <div class="contenedor" id="contenedor_loggin">
+        <label for="usuario">Ingresa tu Usuario</label>
+        <input type="text" name="usuario" id="input_usuario">
+
+        <label for="pass">Ingresa tu contraseña</label>
+        <input type="password" name="pass" id="input_pass">
+
+
+
+
+        <button id="btn_ingresar">Ingresa</button>
+        
+
+    </div>
+
+    <div class="contenedor" id="contenedor_registro">
+
+        <h2>Registrate:</h2>
+
+ 
+            
+            <label for="usuario">Ingresa tu Usuario</label>
+            <input type="text" name="usuario" id="frm_input_usuario">
+
+            <label for="pass">Ingresa tu contraseña</label>
+            <input type="password" name="pass" id="frm_input_pass">
+
+            <button id="btn_registrar">Registrate</button>
+            
+
+
+
 
 
     </div>
 
-    <div class="contenedor_nivel">
-
-        <form>
-            <fieldset>
-                <legend>Nivel de Dificultad</legend>
-
-                <input type="radio" class="radios" name="dificultad" value="facil" checked> Fácil
-
-                <input type="radio" class="radios" name="dificultad" value="intermedio"> Intermedio
-
-                <input type="radio" class="radios" name="dificultad" value="dificil"> Difícil
-
-            </fieldset>
-        </form>
-    </div>
-
-    <button class="boton" id="btn_inicio">INICIO</button>
-
-    <div class="contenedor_palabra_oculta">
-
-        <p id="p_cantidad_letras"></p>
-        <p id="p_palabra_oculta"></p>
-        <p id="p_pista"></p>
-
-    </div>
 
 
 
-    <div class="contenedor_letras">
-
-        <label for="letra_usuario">Ingresa tu letra</label>
-        <input type="text" name="letra_usuario" id="letra_usuario" maxlength="1" placeholder="...">
-        <button id="btn_arriesgar_letra">Arriesgar letra</button>
-        <input type="text" name="palabra_usuario" id="palabra_usuario" placeholder="...">
-        <button id="btn_arriesgar_palabra">Arriesgar palabra</button>
-
-    </div>
-
-    <div class="letras_ingresadas">
-
-        <p id="p_letras_ingresadas"></p>
-
-    </div>
-
-    <div class="mensajes_aciertos">
-
-
-        <p id="p_mensajes_aciertos">Aguardando...</p>
-        <p id="p_mensajes_oportunidades">Buena Suerte!!</p>
-
-    </div>
 
 
 

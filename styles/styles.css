@@ -21,3 +21,9 @@
     letter-spacing: 4px;
     cursor: pointer;
 }
+
+
+
+.ocultar_seccion{
+    display: none;
+}

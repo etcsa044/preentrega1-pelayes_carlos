@@ -2,324 +2,129 @@
 // Clásico Juego de adivinar una palabra al Azar.
 //
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   Index   <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   Loggin   <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-//PENDIENTES:
+//DECALARACIONES:
 
-// VALIDACION DE DATOS EN INPUTS ARRIESGAR LETRA/ARRIESGAR PALABRA.
-// ACTIVAR O DESACTIVAR INPUTS Y BOTON INICIO
-// ESTILOS
-
-// DECLARACIONES:
-
-class PalabraDisponible {
-  constructor(palabra, pista) {
-    this.palabra = palabra;
-    this.pista = pista;
+class Usuario {
+  constructor(nombre_usuario, pass) {
+    this.nombre_usuario = nombre_usuario;
+    this.pass = pass;
   }
 }
 
-//palabras para nivel FACIL:
+// Arrays:
 
-let palabra_facil_uno = new PalabraDisponible(
-  "gato",
-  'animal de 4 patas que dice "MIAU"'
-);
-let palabra_facil_dos = new PalabraDisponible(
-  "perro",
-  'animal de 4 patas que dice "GUAU"'
-);
-let palabra_facil_tres = new PalabraDisponible(
-  "futbol",
-  "deporte de 11 jugadores por equipo"
-);
+let usuariosRegistrados = [];
 
-let palabrasNivelFacil = [
-  palabra_facil_uno,
-  palabra_facil_dos,
-  palabra_facil_tres,
-];
 
-//palabras para nivel MEDIO:
+usuariosRegistrados = recuperacionAutomatica();
 
-let palabra_medio_uno = new PalabraDisponible(
-  "Conservatorio",
-  "Establecimiento en el que se enseña música y otras artes relacionadas con ella"
-);
-let palabra_medio_dos = new PalabraDisponible(
-  "Tucuman",
-  "Es la provincia más chica de Argentina"
-);
-let palabra_medio_tres = new PalabraDisponible(
-  "Salvador",
-  "Nombre del Famoso Pintor de Apellido Dalí"
-);
+// usuariosRegistrados.forEach(element => {
+//   console.log(element.nombre_usuario);
+//   console.log(element.pass);
+// });;
 
-let palabrasNivelMedio = [
-  palabra_medio_uno,
-  palabra_medio_dos,
-  palabra_medio_tres,
-];
+// Declaraciones DOM:
 
-//palabras para nivel DIFICIL:
+// botones:
 
-let palabra_dificil_uno = new PalabraDisponible(
-  "Epifania",
-  "Manifestación repentina de una verdad"
-);
-let palabra_dificil_dos = new PalabraDisponible(
-  "Viscocidad",
-  "propiedad importante de los líquidos que describe la resistencia del líquido al flujo y está relacionada con la fricción interna en el líquido."
-);
-let palabra_dificil_tres = new PalabraDisponible(
-  "Billete",
-  "Papel impreso o grabado, generalmente emitido por el banco central de un país, al que se le asigna un valor pecuniario determinado y se emplea como medio legal de pago."
-);
+let btn_ingresar = document.getElementById("btn_ingresar");
+let btn_registrar = document.getElementById("btn_registrar");
 
-let palabrasNivelDificil = [
-  palabra_dificil_uno,
-  palabra_dificil_dos,
-  palabra_dificil_tres,
-];
+//inputs:
 
-let nombreUsuario;
-let palabra = ""; //palabra seleccionada por el usuario
-let palabra1 = ""; //palabra del usuario convertida en array
-let palabraOculta = ""; //array convertido en "#"
-let palabraFinal = ""; //Se utiliza en caso de que el usuario agote la cantidad de intentos
+let input_usuario = document.getElementById("input_usuario");
+let input_pass = document.getElementById("input_pass");
 
-let letra = ""; //Utilizada para almacenar las letras que debe cargar el usuario para adivinar la palabra
+let frm_input_usuario = document.getElementById("frm_input_usuario");
+let frm_input_pass = document.getElementById("frm_input_pass");
 
-let letrasSeleccionadas = "";
-let vidas = 6;
+// Eventos:
 
-let validador = /[a-zA-ZñÑ]/; //expresión regular para filtrado en input de letra y palabra
+btn_ingresar.addEventListener("click", ingresar);
+btn_registrar.addEventListener("click", registrarUsuario);
 
-//declaraciones DOM
+// Funciones:
 
-//botones:
+function recuperacionAutomatica() {
+  let datos_recuperados = localStorage.getItem("usuarios");
 
-let btn_inicio = document.getElementById("btn_inicio");
-let btn_arriesgarLetra = document.getElementById("btn_arriesgar_letra");
-let btn_arriesgarPalabra = document.getElementById("btn_arriesgar_palabra");
+  datos_recuperados = JSON.parse(datos_recuperados);
 
-//textos:
-let p_cantidadLetras = document.getElementById("p_cantidad_letras");
-let p_palabraOculta = document.getElementById("p_palabra_oculta");
-let p_pista = document.getElementById("p_pista");
-let p_letrasIngresadas = document.getElementById("p_letras_ingresadas");
-let p_mensajeAciertos = document.getElementById("p_mensajes_aciertos");
-let p_mensajeOportunidades = document.getElementById(
-  "p_mensajes_oportunidades"
-);
-let span_vidas = document.getElementById("vidas");
-
-// inputs
-let input_letra = document.getElementById("letra_usuario");
-let input_palabra = document.getElementById("palabra_usuario");
-let input_radios = document.getElementsByClassName("radios");
-
-//Eventos
-
-// btn_inicio.addEventListener("click", jugar);
-btn_arriesgarLetra.addEventListener("click", adivinar);
-btn_arriesgarPalabra.addEventListener("click", arriesgarPalabra);
-btn_inicio.addEventListener("click", jugar);
-
-//FUNCIONES:
-
-function convertirPalabraArray(a) {
-  //Convierte el String inicial en un Array de Strings.
-  palabra1 = Array.from(a);
-  return palabra1;
-}
-
-function ocultarPalabra() {
-  //genera un array que muestra con # la cantidad de letras que tiene la palabra:
-  let aux = "";
-  for (i = 0; i < palabra.length; i++) {
-    aux += "#";
-  }
-  palabraOculta = Array.from(aux);
-  return palabraOculta;
-}
-
-function jugar() {
-  //Da la bienvenida al usuario y llama a la funciona "ADIVINAR"
-
-  let nivelDeJuego = seleccionarNivel();
-
-  let seleccionRandom = elegirPalabraRandom(nivelDeJuego);
-
-  palabra = nivelDeJuego[seleccionRandom].palabra;
-
-  palabra = palabra.toUpperCase();
-
-  palabra1 = convertirPalabraArray(palabra);
-  palabraOculta = ocultarPalabra();
-
-  p_cantidadLetras.innerText = `su palabra contiene ${palabra.length} letras`;
-  p_palabraOculta.innerText = `Su palabra se oculta aqui: ${palabraOculta}`;
-  p_pista.innerText = `Aqui tienes una pista: ${nivelDeJuego[seleccionRandom].pista}`;
-
-  // window.location.reload();  DEJAMOS ACÁ HASTA CREAR BOTON REINICIO <<<<<<<<<<<<<<<<<<<<<<<<<
-}
-
-function mensajeAciertos(a) {
-  //Muestra mensajes en base a la letra seleccionada por el Usuario
-  if (a > 1) {
-    p_mensajeAciertos.innerText = `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta`;
-    // alert(
-    //   `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta`
-    // );
-  } else if (a == 1) {
-    p_mensajeAciertos.innerText = `la letra pertenece a la Palabra Oculta`;
-
-    // alert(`la letra pertenece a la Palabra Oculta`);
+  if (datos_recuperados != null) {
+    return datos_recuperados;
   } else {
-    p_mensajeAciertos.innerText = `la letra seleccionada NO pertenece a la Palabra Oculta`;
-    // alert(`la letra seleccionada NO pertenece a la Palabra Oculta`);
-    restarVidas();
-    span_vidas.innerText = vidas;
+    return [];
   }
 }
 
-function compararArrays(a, b) {
-  //Funcion que compara en cada interación si la palabra formada por el usuario coincide o no con la palabra oculta.
+function registrarUsuario() {
+  let usuarioNuevo = new Usuario();
+
+  usuarioNuevo.nombre_usuario = frm_input_usuario.value;
+  usuarioNuevo.pass = frm_input_pass.value;
+
+  if(validarCargaUsuario(usuarioNuevo)){
+    alert("Usuario Creado correctamente")
+    usuariosRegistrados.push(usuarioNuevo)
+  } 
+
+  let usuariosRegistrados_json = JSON.stringify(usuariosRegistrados);
+
+  localStorage.setItem("usuarios", usuariosRegistrados_json);
+}
+
+function ingresar() {
+  let usuarioNuevo = new Usuario();
   let aux = 0;
-  for (let k = 0; k < a.length; k++) {
-    if (a[k] == b[k]) {
-      aux++; // OPERADOR AVANZADO
-    }
-  }
-  if (aux == a.length) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
-function restarVidas() {
-  vidas--; // OPERADOR AVANZADO
-  return vidas;
-}
+  usuarioNuevo.nombre_usuario = input_usuario.value;
+  usuarioNuevo.pass = input_pass.value;
 
-function adivinar() {
-  //Función encargada de la logica del del juego, una vez que inicia, inicia un doble for, el primero pedirá
-  //una letra al Usuario, el segundo compara la letra ingresada con todas las que forman el array
-  //evaluando las que corresponden o no a la Palabra Oculta.
+  let usuarios_recuperados = localStorage.getItem("usuarios");
 
-  let contadorAciertos = 0;
+  console.log(usuarios_recuperados);
 
-  letra = input_letra.value;
-  letra = letra.toUpperCase();
+  usuarios_recuperados = JSON.parse(usuarios_recuperados);
 
-  let pausa = validarInputsUsuario(letra);
-
-  if (pausa == 1) {
-    letrasSeleccionadas += "[" + letra + "] ";
-
-    p_letrasIngresadas.innerText =
-      "hasta el momento has seleccionado: " + letrasSeleccionadas;
-
-    for (i = 0; i <= palabra.length; i++) {
-      if (palabra1[i] == letra) {
-        palabraOculta[i] = letra;
-        contadorAciertos += 1;
+  if (usuarios_recuperados != null) {
+    usuarios_recuperados.forEach((element) => {
+      if (usuarios_recuperados != []) {
+      } //Función Orden Superior
+      if (
+        usuarioNuevo.nombre_usuario == element.nombre_usuario &&
+        usuarioNuevo.pass == element.pass
+      ) {
+        aux++;
       }
-    }
-
-    input_letra.value = "";
-
-    mensajeAciertos(contadorAciertos);
-
-    contadorAciertos = 0;
-
-    console.log(palabraOculta);
-    console.log(palabra1);
-
-    let prueba = compararArrays(palabra1, palabraOculta);
-
-    if (prueba) {
-      alert("¡¡FELICITACIONES GANASTE!!");
-    } else if (vidas > 0) {
-      p_mensajeOportunidades.innerText = `te quedan ${vidas} oportunidad/es`;
-    } else if (vidas == 0) {
-      palabraFinal = prompt(
-        "Te quedaste sin vidas, debes arriesgar una palabra"
-      );
-      palabraFinal = palabraFinal.toUpperCase();
-
-      if (palabraFinal == palabra) {
-        alert("¡¡FELICITACIONES GANASTE!!");
-      } else {
-        alert(`Intenta de nuevo! la palabra oculta era:
-                    ${palabra}`);
-      }
-    }
-
-    p_palabraOculta.innerText = `Su palabra se oculta aqui: ${palabraOculta}`;
-
-    letra = "";
-  } else {
-    alert("ud debe ingresar letras de la A a la Z");
-  }
-}
-
-function elegirPalabraRandom(a) {
-  let auxMin = 0;
-  let auxMax = a.length;
-
-  let resultado = Math.floor(Math.random() * (auxMax - auxMin + 1) + auxMin);
-
-  return resultado;
-}
-
-function seleccionarNivel() {
-  if (input_radios[0].checked) {
-    return palabrasNivelFacil;
-  } else if (input_radios[1].checked) {
-    return palabrasNivelMedio;
-  } else if (input_radios[2].checked) {
-    return palabrasNivelDificil;
-  }
-}
-
-function arriesgarPalabra() {
-  palabraFinal = input_palabra.value;
-  palabraFinal = palabraFinal.toUpperCase();
-
-  let aux = validarInputsUsuario(palabraFinal);
-
-  if (aux == 1) {
-    if (palabraFinal == palabra) {
-      alert("¡¡FELICITACIONES GANASTE!!");
+    });
+    if (aux == 1) {
+      location.href = "./views/play.html";
     } else {
-      alert(`Intenta de nuevo! la palabra oculta era:
-                  ${palabra}`);
+      alert("Primero debes registrarte!");
     }
-    palabraFinal = "";
-    window.location.reload();
   } else {
-    palabraFinal = "";
-    alert("Debe ingresar caractéres válidos");
+    alert("Primero debes registrarte!");
   }
 }
 
-function validarInputsUsuario(a) {
-  let aux = 0;
+function validarCargaUsuario(a) {
 
-  let validadorLetras = /[a-zA-ZñÑ]/;
-  let validadorNumeros = /[0-9]/;
+  let validaccionExitosa;
+  
+  let validacionNombreDuplicado;
 
-  let resultado1 = validadorLetras.test(a);
-  let resultado2 = validadorNumeros.test(a);
+  let validacionPass = a.pass.length > 5 ? true : alert("el password debe tener al menos 6 caracteres");
 
-  if (resultado1 == true) {
-    aux++;
-  } else if (resultado2 == true) {
-    aux--;
-  }
 
-  return aux;
+  validacionNombreDuplicado = usuariosRegistrados.some(
+    (e) => e.nombre_usuario == a.nombre_usuario
+  );
+
+  validacionNombreDuplicado ? alert("El nombre no está disponible, Seleccione otro por favor"):false;
+
+
+  return validaccionExitosa = !(validacionNombreDuplicado) && validacionPass;
+  
 }
