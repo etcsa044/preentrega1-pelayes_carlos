@@ -111,20 +111,24 @@ let btn_arriesgarPalabra = document.getElementById("btn_arriesgar_palabra");
 
 //textos:
 let h1_mensajes = document.getElementById("h1_mensajes");
+let h3_mensajes = document.getElementById("h3_mensajes");
 let p_cantidadLetras = document.getElementById("p_cantidad_letras");
 let p_palabraOculta = document.getElementById("p_palabra_oculta");
 let p_pista = document.getElementById("p_pista");
 let p_letrasIngresadas = document.getElementById("p_letras_ingresadas");
-let p_mensajeAciertos = document.getElementById("p_mensajes_aciertos");
-let p_mensajeOportunidades = document.getElementById(
-  "p_mensajes_oportunidades"
-);
 let span_vidas = document.getElementById("vidas");
 
 // inputs
 let input_letra = document.getElementById("letra_usuario");
 let input_palabra = document.getElementById("palabra_usuario");
 let input_radios = document.getElementsByClassName("radios");
+
+
+//img:
+let img_ahorcado = document.getElementById("img_ahorcado");
+
+//fieldset:
+let fieldset_nivel = document.getElementById("fieldset_nivel");
 
 //Eventos
 btn_arriesgarLetra.addEventListener("click", adivinar);
@@ -152,7 +156,11 @@ function ocultarPalabra() {
 function jugar() {
   //Da la bienvenida al usuario y llama a la funciona "ADIVINAR"
 
-  ocultarElemento(div_contenedor_nivel);
+  
+  deshabilitarElemento(fieldset_nivel);
+  deshabilitarElemento(btn_inicio);
+
+  
 
   let nivelDeJuego = seleccionarNivel();
 
@@ -166,7 +174,7 @@ function jugar() {
   palabraOculta = ocultarPalabra();
 
   p_cantidadLetras.innerText = `su palabra contiene ${palabra.length} letras`;
-  p_palabraOculta.innerText = `Su palabra se oculta aqui: ${palabraOculta}`;
+  p_palabraOculta.innerText = palabraOculta;
   p_pista.innerText = `Aqui tienes una pista: ${nivelDeJuego[seleccionRandom].pista}`;
 }
 
@@ -180,6 +188,7 @@ function mensajeAciertos(a) {
     h1_mensajes.innerText = `la letra seleccionada NO pertenece a la Palabra Oculta`;
 
     restarVidas();
+    imgSegunVidas(vidas);
     span_vidas.innerText = vidas;
   }
 }
@@ -220,7 +229,7 @@ function adivinar() {
     letrasSeleccionadas += "[" + letra + "] ";
 
     p_letrasIngresadas.innerText =
-      "hasta el momento has seleccionado: " + letrasSeleccionadas;
+      "Letras Seleccionadas" + letrasSeleccionadas;
 
     for (i = 0; i <= palabra.length; i++) {
       if (palabra1[i] == letra) {
@@ -244,14 +253,14 @@ function adivinar() {
       h1_mensajes.innerText = "Felicitaciones Ganaste!!";
       setTimeout(reiniciar, 5000);
     } else if (vidas > 0) {
-      p_mensajeOportunidades.innerText = `te quedan ${vidas} oportunidad/es`;
+      h3_mensajes.innerText = `te quedan ${vidas} oportunidad/es`;
     } else if (vidas == 0) {
       h1_mensajes.innerText =
         "Te quedaste sin vidas, solo puedes arriesgar la palabra";
-      ocultarElemento(div_contenedor_letra);
+      deshabilitarElemento(btn_arriesgarLetra);
     }
 
-    p_palabraOculta.innerText = `Su palabra se oculta aqui: ${palabraOculta}`;
+    p_palabraOculta.innerText = palabraOculta;
 
     letra = "";
   } else if (pausa == 5) {
@@ -288,12 +297,14 @@ function arriesgarPalabra() {
 
   if (aux == 1) {
     if (palabraFinal == palabra) {
-      ocultarElemento(div_contenedor_letra);
+      deshabilitarElemento(btn_arriesgarLetra);
       h1_mensajes.innerText = "Felicitaciones Ganaste!!";
+      img_ahorcado.src = "../img/ahorcadoLibre.svg"
       setTimeout(reiniciar, 5000);
     } else {
-      ocultarElemento(div_contenedor_letra);
+      deshabilitarElemento(btn_arriesgarLetra);
       h1_mensajes.innerText = `Intenta de nuevo! la palabra oculta era: ${palabra}`;
+      img_ahorcado.src = "../img/ahorcadoMuerto.svg"
       setTimeout(reiniciar, 5000);
     }
     palabraFinal = "";
@@ -341,10 +352,19 @@ function deshabilitaRetroceso() {
   };
 }
 
-function ocultarElemento(a) {
-  a.classList.toggle("ocultar_seccion");
+function deshabilitarElemento(a) {
+  a.setAttribute("disabled","disabled");
 }
 
 function reiniciar() {
   window.location.reload();
+}
+
+
+function imgSegunVidas(a){
+  let NombreBase = "../img/ahorcado"
+  let extension = ".svg"
+  let indice = a;
+  let src = NombreBase+indice+extension;
+  img_ahorcado.src = src;
 }

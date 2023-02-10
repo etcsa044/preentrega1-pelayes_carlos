@@ -68,6 +68,7 @@ function registrarUsuario() {
   if(validarCargaUsuario(usuarioNuevo)){
     alert("Usuario Creado correctamente")
     usuariosRegistrados.push(usuarioNuevo)
+    
   } 
 
   let usuariosRegistrados_json = JSON.stringify(usuariosRegistrados);
