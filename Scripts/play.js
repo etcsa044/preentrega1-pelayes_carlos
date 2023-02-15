@@ -111,12 +111,11 @@ let btn_arriesgarPalabra = document.getElementById("btn_arriesgar_palabra");
 
 //textos:
 let h1_mensajes = document.getElementById("h1_mensajes");
-let h3_mensajes = document.getElementById("h3_mensajes");
+// let h3_mensajes = document.getElementById("h3_mensajes");
 let p_cantidadLetras = document.getElementById("p_cantidad_letras");
 let p_palabraOculta = document.getElementById("p_palabra_oculta");
 let p_pista = document.getElementById("p_pista");
 let p_letrasIngresadas = document.getElementById("p_letras_ingresadas");
-let span_vidas = document.getElementById("vidas");
 
 // inputs
 let input_letra = document.getElementById("letra_usuario");
@@ -159,6 +158,8 @@ function jugar() {
   
   deshabilitarElemento(fieldset_nivel);
   deshabilitarElemento(btn_inicio);
+  habilitarElemento(btn_arriesgarLetra);
+  habilitarElemento(btn_arriesgarPalabra);
 
   
 
@@ -167,6 +168,7 @@ function jugar() {
   let seleccionRandom = elegirPalabraRandom(nivelDeJuego);
 
   palabra = nivelDeJuego[seleccionRandom].palabra;
+  
 
   palabra = palabra.toUpperCase();
 
@@ -189,7 +191,6 @@ function mensajeAciertos(a) {
 
     restarVidas();
     imgSegunVidas(vidas);
-    span_vidas.innerText = vidas;
   }
 }
 
@@ -228,8 +229,7 @@ function adivinar() {
   if (pausa == 1) {
     letrasSeleccionadas += "[" + letra + "] ";
 
-    p_letrasIngresadas.innerText =
-      "Letras Seleccionadas" + letrasSeleccionadas;
+    p_letrasIngresadas.innerText = "ingresaste: "+letrasSeleccionadas;
 
     for (i = 0; i <= palabra.length; i++) {
       if (palabra1[i] == letra) {
@@ -251,10 +251,12 @@ function adivinar() {
 
     if (prueba) {
       h1_mensajes.innerText = "Felicitaciones Ganaste!!";
+      img_ahorcado.src = "../img/ahorcadoLibre.svg"
       setTimeout(reiniciar, 5000);
-    } else if (vidas > 0) {
-      h3_mensajes.innerText = `te quedan ${vidas} oportunidad/es`;
-    } else if (vidas == 0) {
+    }
+    // else if (vidas > 0) {
+    // h3_mensajes.innerText = `te quedan ${vidas} oportunidad/es`;
+     else if (vidas == 0) {
       h1_mensajes.innerText =
         "Te quedaste sin vidas, solo puedes arriesgar la palabra";
       deshabilitarElemento(btn_arriesgarLetra);
@@ -290,6 +292,8 @@ function seleccionarNivel() {
 }
 
 function arriesgarPalabra() {
+  deshabilitarElemento(btn_arriesgarLetra);
+  
   palabraFinal = input_palabra.value;
   palabraFinal = palabraFinal.toUpperCase();
 
@@ -298,11 +302,13 @@ function arriesgarPalabra() {
   if (aux == 1) {
     if (palabraFinal == palabra) {
       deshabilitarElemento(btn_arriesgarLetra);
+      deshabilitarElemento(btn_arriesgarPalabra);
       h1_mensajes.innerText = "Felicitaciones Ganaste!!";
       img_ahorcado.src = "../img/ahorcadoLibre.svg"
       setTimeout(reiniciar, 5000);
     } else {
       deshabilitarElemento(btn_arriesgarLetra);
+      deshabilitarElemento(btn_arriesgarPalabra);
       h1_mensajes.innerText = `Intenta de nuevo! la palabra oculta era: ${palabra}`;
       img_ahorcado.src = "../img/ahorcadoMuerto.svg"
       setTimeout(reiniciar, 5000);
@@ -344,16 +350,14 @@ function validarInputsUsuario(a) {
   return aux;
 }
 
-function deshabilitaRetroceso() {
-  window.location.hash = "no-back-button";
-  window.location.hash = "Again-No-back-button"; //chrome
-  window.onhashchange = function () {
-    window.location.hash = "";
-  };
-}
+
 
 function deshabilitarElemento(a) {
   a.setAttribute("disabled","disabled");
+}
+
+function habilitarElemento(a) {
+  a.removeAttribute("disabled");
 }
 
 function reiniciar() {
@@ -368,3 +372,7 @@ function imgSegunVidas(a){
   let src = NombreBase+indice+extension;
   img_ahorcado.src = src;
 }
+
+
+//Apis
+

@@ -14,16 +14,12 @@
     <title>Primera Entrega JS</title>
 </head>
 
-<body class="body" onload="deshabilitaRetroceso()">
+<body class="body" >
 
-
+<div id="contenedor_general">
     <div class="contenedor" id="contenedor_msjs">
         <h1 id="h1_mensajes">Bienvenido!</h1>
-        <p id="p_palabra_oculta"></p>
-        <h2>Adivina la Palabra, tienes <span id="vidas">6</span> vidas!</h2>
-        <h3 id="h3_mensajes">Por cada letra que no pertenezca a la palabra oculta pierdes una vida.</h3>
-
-
+        <p id="p_letras_ingresadas">Letras Seleccionadas: </p>
     </div>
 
     <div class="contenedor" id="contenedor_nivel">
@@ -32,49 +28,63 @@
             <fieldset id="fieldset_nivel">
                 <legend>Nivel de Dificultad</legend>
 
-                <input type="radio" class="radios" name="dificultad" value="facil" checked > Fácil
+                <input type="radio" class="radios" name="dificultad" value="facil" checked> Fácil
 
-                <input type="radio" class="radios" name="dificultad" value="intermedio" > Intermedio
+                <input type="radio" class="radios" name="dificultad" value="intermedio"> Intermedio
 
-                <input type="radio" class="radios" name="dificultad" value="dificil" > Difícil
+                <input type="radio" class="radios" name="dificultad" value="dificil"> Difícil
 
             </fieldset>
         </form>
-        <button class="boton" id="btn_inicio">INICIO</button>
+        <button class="boton" id="btn_inicio">Inicio</button>
 
     </div>
 
 
 
-    
+
     <div class="contenedor" id="contenedor_pista">
 
         <p id="p_cantidad_letras"></p>
         <p id="p_pista"></p>
-        
+
 
     </div>
 
     <div class="contenedor" id="contenedor_img">
         <img src="../img/ahorcado6.svg" alt="imagen mástil ahorcado vacio" id="img_ahorcado">
-        <p id="p_letras_ingresadas"></p>
+        <p id="p_palabra_oculta">?</p>
     </div>
 
 
 
-    <div  class="contenedor"id="contenedor_arriesgar_letra">
+    <div class="contenedor" id="contenedor_arriesgar_letra" >
 
         <label for="letra_usuario" id="label_letra_usuario">Ingresa tu letra</label>
         <input type="text" name="letra_usuario" id="letra_usuario" maxlength="1" autofocus placeholder="...">
-        <button id="btn_arriesgar_letra">Arriesgar letra</button>
+        <button class="boton" id="btn_arriesgar_letra" disabled>Arriesgar Letra</button>
 
     </div>
     <div class="contenedor" id="contenedor_arriesgar_palabra">
 
         <label for="palabra_usuario">Arriesga una palabra</label>
         <input type="text" name="palabra_usuario" id="palabra_usuario" placeholder="...">
-        <button id="btn_arriesgar_palabra">Arriesgar palabra</button>
+        <button class="boton" id="btn_arriesgar_palabra" disabled>Arriesgar Palabra</button>
 
+    </div>
+</div>
+
+
+    <div id="contenedor_apis">
+        <div class="contenido_api" id="api_a">
+            Api 1
+        </div>
+        <div class="contenido_api" id="api_b">
+            Api 2
+        </div>
+        <div class="contenido_api" id="api_c">
+            Api 3
+        </div>
     </div>
 
 

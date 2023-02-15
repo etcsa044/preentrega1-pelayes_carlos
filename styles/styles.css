@@ -9,16 +9,166 @@
     box-sizing: border-box;
   }
 
-
-.body{
+  .body{
     display: grid;
     grid-template-areas: 
-        "img msjs pista"
-        "img msjs pista" 
+        "juego juego juego api";
+    grid-template-columns: repeat(4,1fr);
+    background-image: url(../img/school-photo-frame-_1.jpg);
+    background-size:contain;
+}
+
+#contenedor_general{
+    color: black;
+    width: 80%;
+    height: 90vh;
+    margin: 5vh auto;
+    padding: 10px;
+    grid-area: juego;
+    display: grid;
+    grid-template-areas: 
+        "pista msjs img"
+        "pista msjs img"
         "nivel letra palabra";
     grid-template-columns: repeat(3,1fr);
-    background-color: white;
-    color: red;
+    row-gap: 20px;
+    column-gap: 30px;
+    
+}
+
+p{
+    font-size: 1.6rem;
+}
+
+label{
+    font-size: 1.6rem;
+}
+
+input{
+    font-size: 1.6rem;
+}
+
+#contenedor_pista{
+    grid-area: pista;
+    background-color:darkmagenta;
+    text-align: center;
+    height: 58vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+}
+
+#contenedor_msjs{
+    grid-area: msjs;
+    background-color: red;
+    display: flex;
+    text-align: center;
+    height: 58vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+}
+
+#contenedor_img{
+    grid-area: img;
+    background-color: rgb(181, 181, 242);
+    color: black;
+    height: 58vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);    
+}
+
+#contenedor_nivel{
+    grid-area: nivel;
+    background-color: green;
+    font-size: 25px;
+    height: 29vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+}
+
+
+#contenedor_arriesgar_letra{
+    grid-area: letra;
+    background-color:aquamarine;
+    font-size: 25px;
+    height: 29vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+}
+
+#contenedor_arriesgar_palabra{
+    grid-area: palabra;
+    background-color:blueviolet;
+    height: 29vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+}
+
+#contenedor_apis{
+    height: 90vh;
+    grid-area: api;
+    display: grid;
+    grid-template-areas:
+    "api_a"
+    "api_b"
+    "api_c";    
+    background-color: transparent;
+    color: aliceblue;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+    width: 85%;
+    margin: 5vh auto 5vh 0;
+    /* padding: 10px; */
+    row-gap: 10px;
+}
+
+
+#api_a{
+    background-color: brown;
+}
+#api_b{
+    background-color: grey;
+}
+#api_c{
+    background-color: teal;
+}
+
+.contenido_api{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.802);
+}
+
+.contenedor{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 15px;
+}
+
+
+
+
+.boton{
+    width: 150px;
+    height: 70px;
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+    cursor: pointer;
+}
+
+#img_ahorcado{
+    width: 200px;
+    height: 300px;
+}
+
+
+
+.ocultar_seccion{
+    display: none;
 }
 
 
@@ -75,67 +225,3 @@
     }
 
   }
-
-
-#contenedor_msjs{
-    grid-area: msjs;
-    background-color: aquamarine;
-    display: flex;
-    text-align: center;
-}
-
-#contenedor_img{
-    grid-area: img;
-    background-color: gray;
-}
-
-#contenedor_nivel{
-    grid-area: nivel;
-    background-color: black;
-}
-
-
-#contenedor_arriesgar_letra{
-    grid-area: letra;
-    background-color: cadetblue;
-}
-
-#contenedor_arriesgar_palabra{
-    grid-area: palabra;
-    background-color: wheat;
-}
-
-#contenedor_pista{
-    grid-area: pista;
-    background-color: yellow;
-}
-
-.contenedor{
-    width: 100%;
-    height: 100%;
-    height: 50vh;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.boton{
-    width: 100px;
-    height: 30px;
-    font-size: 1rem;
-    letter-spacing: 4px;
-    cursor: pointer;
-}
-
-#img_ahorcado{
-    width: 150px;
-    height: 300px;
-}
-
-
-
-.ocultar_seccion{
-    display: none;
-}
