@@ -21,5 +21,16 @@ li{
 /* IMG */
 #img_ahorcado{
   width: 100px;
-  height: 300px;
+  height: 200px;
+}
+
+/* IMPUTS */
+#letra_usuario{
+  width: 50px;
+  height: 50px;
+}
+
+#palabra_usuario{
+  width: 100px;
+  height: 50px;
 }

@@ -14,13 +14,15 @@
     <!-- SWEET ALERT -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
 
+    <!-- ANIMATE ANIMATED -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!-- LOCAL -->
     <link rel="stylesheet" href="../styles/styles.css">
     <title>El ahorcado</title>
 </head>
 
-<body class="bg-warning">
+<body class="bg-warning text-capitalize">
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -50,14 +52,12 @@
         </nav>
     </header>
     <h1 class="text-center">Disfruta el clásico "EL Ahorcado".</h1>
+
     <main class="container-fluid">
         <section>
-            <article id="contenedor_msjs">
-                <h2 id="h1_mensajes" class="text-center">Bienvenido!</h2>
-                <p id="p_letras_ingresadas">Letras Seleccionadas: </p>
-            </article>
-
-            <article id="contenedor_nivel">
+            <hr>
+            <!-- SELECCIÓN NIVEL -->
+            <article id="contenedor_nivel" class="d-flex text-center align-items-center justify-content-evenly">
                 <form id="form_nivel">
                     <legend>Nivel de Dificultad</legend>
 
@@ -67,58 +67,75 @@
 
                     <input type="radio" class="radios" name="dificultad" value="dificil"> Difícil
                 </form>
-                <button id="btn_inicio" type="button" class="btn btn-primary btn-sm">Inicio</button>
+                <a href="#contenedor_palabra"><button id="btn_inicio" type="button" class="btn btn-success btn-lg animate__animated ">Inicio</button></a>
             </article>
+            <hr>
 
+            <!-- PISTA -->
             <article id="contenedor_pista">
+                <h2 id="h1_mensajes" class="text-center">Bienvenido!</h2>
                 <p id="p_cantidad_letras"></p>
                 <p id="p_pista"></p>
             </article>
+            <hr>
 
-            <article id="contenedor_arriesgar_letra">
+            <!-- INPUT LETRA -->
+            <article id="contenedor_arriesgar_letra"
+                class="d-flex text-center align-items-center justify-content-evenly">
                 <label for="letra_usuario" id="label_letra_usuario">Ingresa tu letra</label>
                 <input type="text" name="letra_usuario" id="letra_usuario" maxlength="1" autofocus placeholder="...">
-                <button id="btn_arriesgar_letra" type="button" class="btn btn-primary btn-sm" disabled>Arriesgar
-                    Letra</button>
+                <a href="#ancla"><button id="btn_arriesgar_letra" type="button" class="btn btn-dark btn-sm " disabled>Arriesgar
+                    Letra</button></a>
             </article>
+            <hr>
 
-            <article id="contenedor_arriesgar_palabra">
+            <!-- INPUT PALABRA -->
+            <article id="contenedor_arriesgar_palabra" class="d-flex text-center align-items-center">
                 <label for="palabra_usuario">Arriesga una palabra</label>
                 <input type="text" name="palabra_usuario" id="palabra_usuario" placeholder="...">
-                <button id="btn_arriesgar_palabra" type="button" class="btn btn-primary btn-sm" disabled>Arriesgar
+                <button id="btn_arriesgar_palabra" type="button" class="btn btn-dark btn-sm " disabled>Arriesgar
                     Palabra</button>
             </article>
+            <hr id="ancla">
 
-<!-- IMG -->
-            <article id="contenedor_img">
-                <img src="../img/ahorcado6.svg" id="img_ahorcado" class="img-fluid" alt="imagen mástil ahorcado vacio" >
-                <p id="p_palabra_oculta">?</p>
+            <!-- IMG -->
+            <article id="contenedor_img" class="img-fluid d-flex align-items-center justify-content-evenly">
+                <img src="../img/ahorcado6.svg" id="img_ahorcado" class="" alt="imagen mástil ahorcado vacio">
+                <p id="p_palabra_oculta" class="display-6">?</p>
+            </article>
+            <hr>
+
+            <!-- LETRAS SELECCIONADAS -->
+            <article id="contenedor_msjs">
+                <p id="p_letras_ingresadas">Letras Seleccionadas: </p>
             </article>
         </section>
-
-<!-- API -->
+        <hr>
+        <!-- API -->
         <section id="contenedor_apis">
-            <article id="api_a">
+            <article id="api_a" class="d-flex justify-content-evenly">
                 <p id="p_latitud">esperando...</p>
                 <p id="p_longitud"></p>
             </article>
         </section>
     </main>
 
-    <footer
-        class="container-fluid d-flex align-items-center justify-content-evenly bg-light text-dark text-center mt-3">
-        <section class="d-flex align-items-center">
+    <footer class="container-fluid bg-light text-dark mt-1 d-flex align-items-center">
+        <section class="d-flex align-items-center w-100">
             <a href="index.html"><img src="../img/dice-5.svg" alt="Logo" width="30" height="24"
-                    class="d-inline-block align-text-top">Charlie´s</a>
+                    class="d-inline-block align-text-top"></a>
         </section>
-        <section>
-            <p>todos los derechos reservados</p>
+        <section class="d-flex align-items-center w-100">
+            <p class="text-center">todos los derechos reservados</p>
         </section>
-        <section class="d-flex">
-            <ol class="d-flex align-items-center">
-                <li class="m-1"> <a href=""><img src="../img/instagram.svg" alt="Logo" width="30" height="24"></a> </li>
-                <li class="m-1"> <a href=""><img src="../img/linkedin.svg" alt="Logo" width="30" height="24"></a> </li>
-                <li class="m-1"> <a href=""><img src="../img/facebook.svg" alt="Logo" width="30" height="24"></a> </li>
+        <section class="d-flex align-items-center w-100">
+            <ol class="d-flex align-items-center justify-content-around">
+                <li> <a href="https://www.instagram.com/charlie_pelayes/"><img src="../img/instagram.svg" alt="Logo"
+                            width="30" height="24"></a> </li>
+                <li> <a href="https://www.linkedin.com/in/carlos-pelayes-12b289b9"><img src="../img/linkedin.svg"
+                            alt="Logo" width="30" height="24"></a> </li>
+                <li> <a href="https://www.facebook.com/charlie.pelayes/"><img src="../img/facebook.svg" alt="Logo"
+                            width="30" height="24"></a> </li>
             </ol>
         </section>
     </footer>

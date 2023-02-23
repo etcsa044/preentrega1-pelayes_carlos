@@ -21,43 +21,74 @@ class PalabraDisponible {
 //palabras para nivel FACIL:
 
 let palabra_facil_uno = new PalabraDisponible(
-  "gato",
-  'animal de 4 patas que dice "MIAU"'
+  "blancanieves",
+  'Es el nombre de una princesa de cuentos clásicos de niños'
 );
 let palabra_facil_dos = new PalabraDisponible(
-  "perro",
-  'animal de 4 patas que dice "GUAU"'
+  "Piano",
+  'Instrumento musical de cuerda percutida formado por una serie de cuerdas metálicas de diferente longitud y diámetro, ordenadas de mayor a menor en una caja de resonancia, y una serie de teclas blancas y negras.'
 );
 let palabra_facil_tres = new PalabraDisponible(
-  "futbol",
-  "deporte de 11 jugadores por equipo"
+  "Cesped",
+  "Conjunto de plantas sin tronco con hojas de color verde, finas, cortas y tupidas, que se planta en jardines por motivos ornamentales y en terrenos deportivos para cubrir el suelo"
+);
+let palabra_facil_cuatro = new PalabraDisponible(
+  "Escuela",
+  "Institución destinada a la enseñanza, en especial la primaria, que proporciona conocimientos que se consideran básicos en la alfabetización."
+);
+let palabra_facil_cinco = new PalabraDisponible(
+  "Clorofila",
+  "Pigmento de color verde que se halla presente en las hojas y tallos de muchos vegetales y que es responsable del proceso de fotosíntesis; se emplea en farmacia y cosmética."
+);
+let palabra_facil_seis = new PalabraDisponible(
+  "Argentina",
+  "Nombre del país que obtuvo la última copa del mundo, tras ganarle a Francia por penales"
 );
 
 let palabrasNivelFacil = [
   palabra_facil_uno,
   palabra_facil_dos,
   palabra_facil_tres,
+  palabra_facil_cuatro,
+  palabra_facil_cinco,
+  palabra_facil_seis,
 ];
 
 //palabras para nivel MEDIO:
 
 let palabra_medio_uno = new PalabraDisponible(
   "Conservatorio",
-  "Establecimiento en el que se enseña música y otras artes relacionadas con ella"
+  "Establecimiento en el que se enseña música y otras artes relacionadas con ella."
 );
 let palabra_medio_dos = new PalabraDisponible(
-  "Tucuman",
-  "Es la provincia más chica de Argentina"
+  "Disparate",
+  "Dicho o hecho totalmente absurdo, equivocado o carente de lógica o sentido"
 );
 let palabra_medio_tres = new PalabraDisponible(
-  "Salvador",
-  "Nombre del Famoso Pintor de Apellido Dalí"
+  "Gaseoso",
+  "Uno de los 3 estados del agua."
+);
+let palabra_medio_cuatro = new PalabraDisponible(
+  "Tamesis",
+  "Famoso río de Londres"
+);
+let palabra_medio_cinco = new PalabraDisponible(
+  "Acallar",
+  "Hacer que cesen los gritos, quejas, risas o llantos de una persona, o que ésta deje de producirlos"
+);
+let palabra_medio_seis = new PalabraDisponible(
+  "Desconcierto",
+  "Estado de confusión o desorientación en que queda una persona a causa de algo inesperado o sorprendente"
 );
 
 let palabrasNivelMedio = [
   palabra_medio_uno,
   palabra_medio_dos,
   palabra_medio_tres,
+  palabra_medio_cuatro,
+  palabra_medio_cinco,
+  palabra_medio_seis,
+
 ];
 
 //palabras para nivel DIFICIL:
@@ -71,14 +102,29 @@ let palabra_dificil_dos = new PalabraDisponible(
   "propiedad importante de los líquidos que describe la resistencia del líquido al flujo y está relacionada con la fricción interna en el líquido."
 );
 let palabra_dificil_tres = new PalabraDisponible(
-  "Billete",
-  "Papel impreso o grabado, generalmente emitido por el banco central de un país, al que se le asigna un valor pecuniario determinado y se emplea como medio legal de pago."
+  "mendacidad",
+  "Sinónimo de falsedad, mentira."
+);
+let palabra_dificil_cuatro = new PalabraDisponible(
+  "resiliencia",
+  "capacidad de adaptación de un ser vivo frente a un agente perturbador  o situación adversa"
+);
+let palabra_dificil_cinco = new PalabraDisponible(
+  "nefelibata",
+  "dicho de una persona: soñadora, que no se apercibe de la realidad"
+);
+let palabra_dificil_seis = new PalabraDisponible(
+  "Inefable",
+  "Que no puede ser dicho, explicado o descrito con palabras, generalmente por tener cualidades excelsas o por ser muy sutil o difuso."
 );
 
 let palabrasNivelDificil = [
   palabra_dificil_uno,
   palabra_dificil_dos,
   palabra_dificil_tres,
+  palabra_dificil_cuatro,
+  palabra_dificil_cinco,
+  palabra_dificil_seis
 ];
 
 let nombreUsuario;
@@ -164,6 +210,7 @@ function jugar() {
   deshabilitarElemento(btn_inicio);
   habilitarElemento(btn_arriesgarLetra);
   habilitarElemento(btn_arriesgarPalabra);
+  agregarClase(btn_inicio);
 
   let nivelDeJuego = seleccionarNivel();
 
@@ -176,19 +223,19 @@ function jugar() {
   palabra1 = convertirPalabraArray(palabra);
   palabraOculta = ocultarPalabra();
 
-  p_cantidadLetras.innerText = `su palabra contiene ${palabra.length} letras`;
+  p_cantidadLetras.innerText = `su palabra contiene ${palabra.length} letras.`;
   p_palabraOculta.innerText = palabraOculta;
-  p_pista.innerText = `Aqui tienes una pista: ${nivelDeJuego[seleccionRandom].pista}`;
+  p_pista.innerText = `Aquí tienes una pista: ${nivelDeJuego[seleccionRandom].pista}`;
 }
 
 function mensajeAciertos(a) {
   //Muestra mensajes en base a la letra seleccionada por el Usuario
   if (a > 1) {
-    h1_mensajes.innerText = `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta`;
+    h1_mensajes.innerText = `FELICITACIONES... la letra aparece más de una vez en la Palabra Oculta.`;
   } else if (a == 1) {
-    h1_mensajes.innerText = `la letra pertenece a la Palabra Oculta`;
+    h1_mensajes.innerText = `la letra pertenece a la Palabra Oculta.`;
   } else {
-    h1_mensajes.innerText = `la letra seleccionada NO pertenece a la Palabra Oculta`;
+    h1_mensajes.innerText = `la letra seleccionada NO pertenece a la Palabra Oculta.`;
 
     restarVidas();
     imgSegunVidas(vidas);
@@ -259,7 +306,7 @@ function adivinar() {
     // h3_mensajes.innerText = `te quedan ${vidas} oportunidad/es`;
     else if (vidas == 0) {
       h1_mensajes.innerText =
-        "Te quedaste sin vidas, solo puedes arriesgar la palabra";
+        "Te quedaste sin vidas, sólo puedes arriesgar la palabra.";
       deshabilitarElemento(btn_arriesgarLetra);
     }
 
@@ -267,9 +314,9 @@ function adivinar() {
 
     letra = "";
   } else if (pausa == 5) {
-    h1_mensajes.innerText = "La letra ya se ingresó";
+    h1_mensajes.innerText = "La letra ya se ingresó.";
   } else {
-    h1_mensajes.innerText = "ud debe ingresar letras de la A a la Z";
+    h1_mensajes.innerText = "ud debe ingresar letras de la A a la Z.";
   }
 }
 
@@ -357,6 +404,10 @@ function deshabilitarElemento(a) {
 
 function habilitarElemento(a) {
   a.removeAttribute("disabled");
+}
+
+function agregarClase(a){
+  a.classList.add("animate__hinge");
 }
 
 function reiniciar() {
