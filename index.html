@@ -8,7 +8,8 @@
     <!-- CDN -->
 
     <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- SWEET ALERT -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
@@ -19,33 +20,87 @@
     <title>El ahorcado</title>
 </head>
 
-<body class="body">
+<body class="body_index bg-dark">
 
-    <h1>El Ahorcado</h1>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <img src="./img/dice-5.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <a class="navbar-brand" href="./index.html">Charlie´s</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Instrucciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Diccionario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Sugiere Palabras</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <div class="contenedor" id="contenedor_loggin">
-        <label for="usuario">Ingresa tu Usuario</label>
-        <input type="text" name="usuario" id="input_usuario">
 
-        <label for="pass">Ingresa tu contraseña</label>
-        <input type="password" name="pass" id="input_pass">
-        <button id="btn_ingresar">Ingresa</button>
+    <main class="container-fluid text-secondary">
+
+        <h1 class="ms-3">EL AHORCADO</h1>
+
+        <div class="contenedor" id="contenedor_loggin">
+            <h2>Inicia Sesion</h2>
+
+            <label for="usuario">Ingresa tu Usuario</label>
+            <input type="text" name="usuario" id="input_usuario">
+
+            <label for="pass">Ingresa tu contraseña</label>
+            <input type="password" name="pass" id="input_pass">
+            <button id="btn_ingresar" type="button" class="btn btn-secondary btn-lg mt-3" >Ingresa</button>
 
 
-    </div>
+        </div>
 
-    <div class="contenedor" id="contenedor_registro">
-        <h2>Registrate:</h2>
+        <div class="contenedor" id="contenedor_registro">
+            <h2>Registrate:</h2>
 
-        <label for="usuario">Ingresa tu Usuario</label>
-        <input type="text" name="usuario" id="frm_input_usuario">
+            <label for="usuario">Ingresa tu Usuario</label>
+            <input type="text" name="usuario" id="frm_input_usuario">
 
-        <label for="pass">Ingresa tu contraseña</label>
-        <input type="password" name="pass" id="frm_input_pass">
+            <label for="pass">Ingresa tu contraseña</label>
+            <input type="password" name="pass" id="frm_input_pass">
 
-        <button id="btn_registrar">Registrate</button>
-    </div>
+            <button id="btn_registrar" type="button" class="btn btn-secondary btn-lg mt-3">Registrate</button>
+        </div>
 
+    </main>
+
+    <footer
+        class="container-fluid d-flex align-items-center justify-content-evenly bg-light text-dark text-center mt-3">
+        <section class="d-flex align-items-center">
+            <a href="index.html"><img src="./img/dice-5.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">Charlie´s</a>
+        </section>
+        <section>
+            <p>todos los derechos reservados</p>
+        </section>
+        <section class="d-flex">
+            <ol class="d-flex align-items-center">
+                <li class="m-1"> <a href=""><img src="./img/instagram.svg" alt="Logo" width="30" height="24"></a> </li>
+                <li class="m-1"> <a href=""><img src="./img/linkedin.svg" alt="Logo" width="30" height="24"></a> </li>
+                <li class="m-1"> <a href=""><img src="./img/facebook.svg" alt="Logo" width="30" height="24"></a> </li>
+            </ol>
+        </section>
+
+
+    </footer>
 
 
 
@@ -55,11 +110,13 @@
     <!-- SCRIPTS -->
 
     <!-- BOOTSTRAP -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
 
     <!-- SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
-    
+
     <!-- lOCAL -->
     <script src="./Scripts/main.js"></script>
 </body>

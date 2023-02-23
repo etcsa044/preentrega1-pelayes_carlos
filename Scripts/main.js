@@ -28,15 +28,15 @@ usuariosRegistrados = recuperacionAutomatica();
 // Declaraciones DOM:
 
 // botones:
-
 let btn_ingresar = document.getElementById("btn_ingresar");
 let btn_registrar = document.getElementById("btn_registrar");
-
+console.log(btn_ingresar);
+console.log(btn_registrar);
 //inputs:
 
 let input_usuario = document.getElementById("input_usuario");
 let input_pass = document.getElementById("input_pass");
-
+console.log(input_usuario);
 let frm_input_usuario = document.getElementById("frm_input_usuario");
 let frm_input_pass = document.getElementById("frm_input_pass");
 

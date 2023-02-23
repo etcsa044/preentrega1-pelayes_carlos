@@ -5,85 +5,136 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CDN -->
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    <!-- SWEET ALERT -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
 
+
+    <!-- LOCAL -->
     <link rel="stylesheet" href="../styles/styles.css">
-    <title>Primera Entrega JS</title>
+    <title>El ahorcado</title>
 </head>
 
-<body class="body" >
+<body class="bg-warning">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <img src="../img/dice-5.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <a class="navbar-brand" href="./index.html">Charlie´s</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Instrucciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Diccionario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Sugiere Palabras</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <h1 class="text-center">Disfruta el clásico "EL Ahorcado".</h1>
+    <main class="container-fluid">
+        <section>
+            <article id="contenedor_msjs">
+                <h2 id="h1_mensajes" class="text-center">Bienvenido!</h2>
+                <p id="p_letras_ingresadas">Letras Seleccionadas: </p>
+            </article>
 
-<div id="contenedor_general">
-    <div class="contenedor" id="contenedor_msjs">
-        <h1 id="h1_mensajes">Bienvenido!</h1>
-        <p id="p_letras_ingresadas">Letras Seleccionadas: </p>
-    </div>
+            <article id="contenedor_nivel">
+                <form id="form_nivel">
+                    <legend>Nivel de Dificultad</legend>
 
-    <div class="contenedor" id="contenedor_nivel">
+                    <input type="radio" class="radios" name="dificultad" value="facil" checked> Fácil
 
-        <form>
+                    <input type="radio" class="radios" name="dificultad" value="intermedio"> Intermedio
 
-                <legend>Nivel de Dificultad</legend>
+                    <input type="radio" class="radios" name="dificultad" value="dificil"> Difícil
+                </form>
+                <button id="btn_inicio" type="button" class="btn btn-primary btn-sm">Inicio</button>
+            </article>
 
-                <input type="radio" class="radios" name="dificultad" value="facil" checked> Fácil
+            <article id="contenedor_pista">
+                <p id="p_cantidad_letras"></p>
+                <p id="p_pista"></p>
+            </article>
 
-                <input type="radio" class="radios" name="dificultad" value="intermedio"> Intermedio
+            <article id="contenedor_arriesgar_letra">
+                <label for="letra_usuario" id="label_letra_usuario">Ingresa tu letra</label>
+                <input type="text" name="letra_usuario" id="letra_usuario" maxlength="1" autofocus placeholder="...">
+                <button id="btn_arriesgar_letra" type="button" class="btn btn-primary btn-sm" disabled>Arriesgar
+                    Letra</button>
+            </article>
 
-                <input type="radio" class="radios" name="dificultad" value="dificil"> Difícil
+            <article id="contenedor_arriesgar_palabra">
+                <label for="palabra_usuario">Arriesga una palabra</label>
+                <input type="text" name="palabra_usuario" id="palabra_usuario" placeholder="...">
+                <button id="btn_arriesgar_palabra" type="button" class="btn btn-primary btn-sm" disabled>Arriesgar
+                    Palabra</button>
+            </article>
 
-        </form>
-        <button class="boton" id="btn_inicio">Inicio</button>
+<!-- IMG -->
+            <article id="contenedor_img">
+                <img src="../img/ahorcado6.svg" id="img_ahorcado" class="img-fluid" alt="imagen mástil ahorcado vacio" >
+                <p id="p_palabra_oculta">?</p>
+            </article>
+        </section>
 
-    </div>
+<!-- API -->
+        <section id="contenedor_apis">
+            <article id="api_a">
+                <p id="p_latitud">esperando...</p>
+                <p id="p_longitud"></p>
+            </article>
+        </section>
+    </main>
 
-
-
-
-    <div class="contenedor" id="contenedor_pista">
-
-        <p id="p_cantidad_letras"></p>
-        <p id="p_pista"></p>
-
-
-    </div>
-
-    <div class="contenedor" id="contenedor_img">
-        <img src="../img/ahorcado6.svg" alt="imagen mástil ahorcado vacio" id="img_ahorcado">
-        <p id="p_palabra_oculta">?</p>
-    </div>
-
-
-
-    <div class="contenedor" id="contenedor_arriesgar_letra" >
-
-        <label for="letra_usuario" id="label_letra_usuario">Ingresa tu letra</label>
-        <input type="text" name="letra_usuario" id="letra_usuario" maxlength="1" autofocus placeholder="...">
-        <button class="boton" id="btn_arriesgar_letra" disabled>Arriesgar Letra</button>
-
-    </div>
-    <div class="contenedor" id="contenedor_arriesgar_palabra">
-
-        <label for="palabra_usuario">Arriesga una palabra</label>
-        <input type="text" name="palabra_usuario" id="palabra_usuario" placeholder="...">
-        <button class="boton" id="btn_arriesgar_palabra" disabled>Arriesgar Palabra</button>
-
-    </div>
-</div>
-
-
-    <div id="contenedor_apis">
-        <div class="contenido_api" id="api_a">
-            <p id="p_latitud">esperando...</p>
-            <p id="p_longitud"></p>
-        </div>
-    </div>
-
+    <footer
+        class="container-fluid d-flex align-items-center justify-content-evenly bg-light text-dark text-center mt-3">
+        <section class="d-flex align-items-center">
+            <a href="index.html"><img src="../img/dice-5.svg" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">Charlie´s</a>
+        </section>
+        <section>
+            <p>todos los derechos reservados</p>
+        </section>
+        <section class="d-flex">
+            <ol class="d-flex align-items-center">
+                <li class="m-1"> <a href=""><img src="../img/instagram.svg" alt="Logo" width="30" height="24"></a> </li>
+                <li class="m-1"> <a href=""><img src="../img/linkedin.svg" alt="Logo" width="30" height="24"></a> </li>
+                <li class="m-1"> <a href=""><img src="../img/facebook.svg" alt="Logo" width="30" height="24"></a> </li>
+            </ol>
+        </section>
+    </footer>
 
     <!-- SCRIPTS -->
+    <!-- SCRIPTS -->
 
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+
+    <!-- lOCAL -->
     <script src="../Scripts/play.js"></script>
 </body>
 

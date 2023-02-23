@@ -131,8 +131,8 @@ let input_radios = document.getElementsByClassName("radios");
 let img_ahorcado = document.getElementById("img_ahorcado");
 let img_clima = document.getElementById("contenedor_apis");
 
-//fieldset:
-let fieldset_nivel = document.getElementById("fieldset_nivel");
+//form:
+let fieldset_nivel = document.getElementById("form_nivel");
 
 //Eventos
 btn_arriesgarLetra.addEventListener("click", adivinar);
