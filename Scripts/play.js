@@ -94,6 +94,10 @@ let vidas = 6;
 
 let validador = /[a-zA-ZñÑ]/; //expresión regular para filtrado en input de letra y palabra
 
+let apiKey = "ecbcea15ede599f958862fb6e051c123";
+let latitud = 0;
+let longitud = 0;
+
 //declaraciones DOM
 
 //contenedores:
@@ -116,15 +120,16 @@ let p_cantidadLetras = document.getElementById("p_cantidad_letras");
 let p_palabraOculta = document.getElementById("p_palabra_oculta");
 let p_pista = document.getElementById("p_pista");
 let p_letrasIngresadas = document.getElementById("p_letras_ingresadas");
-
+let p_latitud = document.getElementById("p_latitud");
+let p_longitud = document.getElementById("p_longitud");
 // inputs
 let input_letra = document.getElementById("letra_usuario");
 let input_palabra = document.getElementById("palabra_usuario");
 let input_radios = document.getElementsByClassName("radios");
 
-
 //img:
 let img_ahorcado = document.getElementById("img_ahorcado");
+let img_clima = document.getElementById("contenedor_apis");
 
 //fieldset:
 let fieldset_nivel = document.getElementById("fieldset_nivel");
@@ -155,20 +160,16 @@ function ocultarPalabra() {
 function jugar() {
   //Da la bienvenida al usuario y llama a la funciona "ADIVINAR"
 
-  
   deshabilitarElemento(fieldset_nivel);
   deshabilitarElemento(btn_inicio);
   habilitarElemento(btn_arriesgarLetra);
   habilitarElemento(btn_arriesgarPalabra);
-
-  
 
   let nivelDeJuego = seleccionarNivel();
 
   let seleccionRandom = elegirPalabraRandom(nivelDeJuego);
 
   palabra = nivelDeJuego[seleccionRandom].palabra;
-  
 
   palabra = palabra.toUpperCase();
 
@@ -229,7 +230,7 @@ function adivinar() {
   if (pausa == 1) {
     letrasSeleccionadas += "[" + letra + "] ";
 
-    p_letrasIngresadas.innerText = "ingresaste: "+letrasSeleccionadas;
+    p_letrasIngresadas.innerText = "ingresaste: " + letrasSeleccionadas;
 
     for (i = 0; i <= palabra.length; i++) {
       if (palabra1[i] == letra) {
@@ -251,12 +252,12 @@ function adivinar() {
 
     if (prueba) {
       h1_mensajes.innerText = "Felicitaciones Ganaste!!";
-      img_ahorcado.src = "../img/ahorcadoLibre.svg"
+      img_ahorcado.src = "../img/ahorcadoLibre.svg";
       setTimeout(reiniciar, 5000);
     }
     // else if (vidas > 0) {
     // h3_mensajes.innerText = `te quedan ${vidas} oportunidad/es`;
-     else if (vidas == 0) {
+    else if (vidas == 0) {
       h1_mensajes.innerText =
         "Te quedaste sin vidas, solo puedes arriesgar la palabra";
       deshabilitarElemento(btn_arriesgarLetra);
@@ -293,7 +294,7 @@ function seleccionarNivel() {
 
 function arriesgarPalabra() {
   deshabilitarElemento(btn_arriesgarLetra);
-  
+
   palabraFinal = input_palabra.value;
   palabraFinal = palabraFinal.toUpperCase();
 
@@ -304,13 +305,13 @@ function arriesgarPalabra() {
       deshabilitarElemento(btn_arriesgarLetra);
       deshabilitarElemento(btn_arriesgarPalabra);
       h1_mensajes.innerText = "Felicitaciones Ganaste!!";
-      img_ahorcado.src = "../img/ahorcadoLibre.svg"
+      img_ahorcado.src = "../img/ahorcadoLibre.svg";
       setTimeout(reiniciar, 5000);
     } else {
       deshabilitarElemento(btn_arriesgarLetra);
       deshabilitarElemento(btn_arriesgarPalabra);
       h1_mensajes.innerText = `Intenta de nuevo! la palabra oculta era: ${palabra}`;
-      img_ahorcado.src = "../img/ahorcadoMuerto.svg"
+      img_ahorcado.src = "../img/ahorcadoMuerto.svg";
       setTimeout(reiniciar, 5000);
     }
     palabraFinal = "";
@@ -350,10 +351,8 @@ function validarInputsUsuario(a) {
   return aux;
 }
 
-
-
 function deshabilitarElemento(a) {
-  a.setAttribute("disabled","disabled");
+  a.setAttribute("disabled", "disabled");
 }
 
 function habilitarElemento(a) {
@@ -364,15 +363,36 @@ function reiniciar() {
   window.location.reload();
 }
 
-
-function imgSegunVidas(a){
-  let NombreBase = "../img/ahorcado"
-  let extension = ".svg"
+function imgSegunVidas(a) {
+  let NombreBase = "../img/ahorcado";
+  let extension = ".svg";
   let indice = a;
-  let src = NombreBase+indice+extension;
+  let src = NombreBase + indice + extension;
   img_ahorcado.src = src;
 }
 
+//Api
 
-//Apis
+navigator.geolocation.getCurrentPosition(obtenerPosicion);
+
+function obtenerPosicion(posicion) {
+  latitud = posicion.coords.latitude;
+  longitud = posicion.coords.longitude;
+}
+
+
+function obtenerTiempo() {  
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apiKey}&units=metric`
+  )
+    .then((response) => response.json())
+    .then((datos) => {
+      console.log(datos);
+      p_latitud.innerHTML = `${datos.name}  `;
+      p_longitud.innerText = `  ${datos.main.temp}°C`;      
+    });
+}
+
+setTimeout(obtenerTiempo, 5000);
+
 

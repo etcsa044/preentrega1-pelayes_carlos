@@ -66,7 +66,7 @@ function registrarUsuario() {
   usuarioNuevo.pass = frm_input_pass.value;
 
   if(validarCargaUsuario(usuarioNuevo)){
-    alert("Usuario Creado correctamente")
+    Swal.fire("Usuario Creado correctamente")
     usuariosRegistrados.push(usuarioNuevo)
     
   } 
@@ -103,10 +103,10 @@ function ingresar() {
     if (aux == 1) {
       location.href = "./views/play.html";
     } else {
-      alert("Primero debes registrarte!");
+      Swal.fire('Primero Debes Registrarte');
     }
   } else {
-    alert("Primero debes registrarte!");
+    Swal.fire('Primero Debes Registrarte');
   }
 }
 
@@ -116,14 +116,14 @@ function validarCargaUsuario(a) {
   
   let validacionNombreDuplicado;
 
-  let validacionPass = a.pass.length > 5 ? true : alert("el password debe tener al menos 6 caracteres");
+  let validacionPass = a.pass.length > 5 ? true : Swal.fire("el password debe tener al menos 6 caracteres");
 
 
   validacionNombreDuplicado = usuariosRegistrados.some(
     (e) => e.nombre_usuario == a.nombre_usuario
   );
 
-  validacionNombreDuplicado ? alert("El nombre no está disponible, Seleccione otro por favor"):false;
+  validacionNombreDuplicado ? Swal.fire("El nombre no está disponible, Seleccione otro por favor"):false;
 
 
   return validaccionExitosa = !(validacionNombreDuplicado) && validacionPass;
