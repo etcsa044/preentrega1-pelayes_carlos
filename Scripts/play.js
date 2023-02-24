@@ -372,6 +372,7 @@ function arriesgarPalabra() {
 function validarInputsUsuario(a) {
   let aux = 0;
 
+  
   let validadorLetras = /[a-zA-ZñÑ]/;
   let validadorNumeros = /[0-9]/;
   let validadorLetraIngresada = 0;
